@@ -1,0 +1,1 @@
+{"version":3,"sources":["estilos.less","estilos.css"],"names":[],"mappings":"AAAA;EACC,WAAA;CCCA","file":"estilos.css","sourcesContent":[".h1red {\r\n\tcolor: red;\r\n} ",".h1red {\n  color: red;\n}\n"],"sourceRoot":"/source/"}
