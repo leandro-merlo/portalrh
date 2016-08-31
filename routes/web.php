@@ -12,9 +12,14 @@
 */
 
 Route::get('/', function () {
+    Auth::logout();
     return view('welcome');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function(){
+    Route::get('/', 'AdminController@Index');
+});

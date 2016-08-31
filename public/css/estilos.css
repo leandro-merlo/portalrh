@@ -1,5 +1,9 @@
-.h1red {
-  color: red;
+.navbar-brand {
+  padding: 0 !important;
+}
+.navbar-brand h1 {
+  display: inline;
+  vertical-align: middle;
 }
 
 /*# sourceMappingURL=estilos.css.map */
