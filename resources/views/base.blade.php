@@ -7,82 +7,124 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
         <title>@yield('title')</title>
         <link type="text/css" rel="stylesheet" href="{{asset('css/estilos.css')}}" />
         <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js" type="text/javascript"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
-        
+
         @yield('aditional-header-scripts')
         @yield('aditional-header-styles')
-        
+
         <!-- Scripts -->
         <script>
-            window.Laravel = <?php echo json_encode([
+        window.Laravel = <?php
+            echo json_encode([
                 'csrfToken' => csrf_token(),
-            ]); ?>
+            ]);
+        ?>
         </script>        
     </head>
     <body>
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
-
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="@yield('brand_redirect')">
+                    <a class="navbar-brand" > <!--href="@yield('brand_redirect')"> -->
                         @yield('brand')
                     </a>
                 </div>
 
-                <!--<div class="collapse navbar-collapse" id="app-navbar-collapse">-->
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ url('/logout') }}" 
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
-
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                @if(Auth::check())
+                <!-- Menu de navegação -->
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="menu" onfocus="this.blur()" onclick="toggle()">
+                        <span class="">Menu Principal</span>
+                        <i class="fa fa-bars toggle" aria-hidden="true"></i>
+                    </a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Clients</a>
+                    <a href="#">Contact</a>
                 </div>
+                @else
+                
+                @endif
+
+                <!-- Right Side Of Navbar -->
+                <ul id="auth" class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    <li class="dropdown">
+
+                        @if(Auth::check())
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
+                        @endif
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="{{ url('/logout') }}" 
+                                   onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                    Logout
+                                </a>
+
+                                <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
             <!--</div>-->
         </nav>        
-        @yield('header')
-        @yield('content')
-        @yield('footer')
+        <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+        <div id="main">
+            @yield('header')
+            @yield('content')
+            @yield('footer')
+        </div>
     </body>
-    
+
     @yield('aditional-footer-scripts')
     @yield('aditional-footer-styles')    
-    
+
     <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}" />
     <script type="text/javascript" href="{{asset('js/app.js')}}" ></script>
+    <script type="text/javascript">
+        
+        $(document).ready(function(){
+            if ($('#mySidenav').length > 0) {
+                $('#main').css("margin-left",'32px');                
+            } else {
+                $('#main').css("margin-left",'0px');                
+            }         
+        });
+        
+        
+        var x = true;
+        
+        function toggle(){
+            if (x) {
+                openNav();
+            } else {
+                closeNav();
+            }
+            x = !x;
+        }
+        /* Set the width of the side navigation to 280px and the left margin of the page content to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.left = "0px";
+            //document.getElementById("main").style.marginLeft = "280px";
+        }
+
+        /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.left = "-248px";
+            //document.getElementById("main").style.marginLeft = "32px";
+        }
+    </script>
 </html>
