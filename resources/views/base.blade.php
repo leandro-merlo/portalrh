@@ -28,7 +28,7 @@
         </script>        
     </head>
     <body>
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav id='main-nav' class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
                     <!-- Branding Image -->
@@ -37,12 +37,12 @@
                     </a>
                 </div>
 
-                @if(Auth::check())
+                @if(Auth::check() && Route::getCurrentRoute()->getPath() !== 'home')
                 <!-- Menu de navegação -->
                 <div id="mySidenav" class="sidenav">
                     <a href="javascript:void(0)" class="menu" onfocus="this.blur()" onclick="toggle()">
                         <span class="">Menu Principal</span>
-                        <i class="fa fa-bars toggle" aria-hidden="true"></i>
+                        <i id='menu-toggle' class="fa fa-bars toggle" aria-hidden="true"></i>
                     </a>
                     <a href="#">About</a>
                     <a href="#">Services</a>
@@ -118,12 +118,14 @@
         /* Set the width of the side navigation to 280px and the left margin of the page content to 250px */
         function openNav() {
             document.getElementById("mySidenav").style.left = "0px";
+            $('#menu-toggle').removeClass('fa-bars').addClass('fa-times');
             //document.getElementById("main").style.marginLeft = "280px";
         }
 
         /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
         function closeNav() {
             document.getElementById("mySidenav").style.left = "-248px";
+            $('#menu-toggle').removeClass('fa-times').addClass('fa-bars');
             //document.getElementById("main").style.marginLeft = "32px";
         }
     </script>

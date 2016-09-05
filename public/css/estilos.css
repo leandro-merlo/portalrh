@@ -2,17 +2,20 @@
   font-size: 12px;
   font-family: Arial, sans-serif;
 }
-.navbar > .container .navbar-brand {
+#main-nav.navbar {
+  margin-bottom: 0px;
+}
+#main-nav.navbar > .container .navbar-brand {
   padding: 0;
   position: relative;
 }
-.navbar > .container .navbar-brand h1 {
+#main-nav.navbar > .container .navbar-brand h1 {
   margin: auto;
   height: 100%;
   padding-top: 2px;
 }
 @media (max-width: 767px) {
-  .navbar > .container .navbar-brand {
+  #main-nav.navbar > .container .navbar-brand {
     margin-left: 15px;
   }
 }
@@ -88,6 +91,7 @@
   margin-left: 32px;
   -webkit-transition: margin-left 0.5s;
   transition: margin-left 0.5s;
+  margin-top: 50px;
 }
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {

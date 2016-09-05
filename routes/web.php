@@ -21,5 +21,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['prefix' => '/admin', 'middleware' => 'auth'], function(){
-    Route::get('/', 'AdminController@Index');
+    Route::get('/', 'AdministrationController@Index');
 });
+
+Route::post('/select_app', 'SelectionAppController@select');
